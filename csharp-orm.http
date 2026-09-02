@@ -1,0 +1,39 @@
+@host = http://localhost:5192
+
+### Create contact data and author together
+POST {{host}}/author
+Content-Type: application/json
+
+{
+  "firstName": "Ees",
+  "lastName": "Pere",
+  "personalCode": "3444333",
+  "contact": {
+    "address": "Tammsaare tee 11",
+    "phone": "55123123"
+  }
+}
+
+### Create an article (use an existing authorId)
+POST {{host}}/article
+Content-Type: application/json
+
+{
+  "header": "Pealkiri",
+  "content": "Sisu",
+  "authorId": 1
+}
+
+### Create a comment (use existing articleId and authorId)
+POST {{host}}/comment
+Content-Type: application/json
+
+{
+  "content": "Kommentaari sisu",
+  "articleId": 1,
+  "authorId": 1
+}
+
+### Get one article's comments
+GET {{host}}/comment/article/1
+Accept: application/json
